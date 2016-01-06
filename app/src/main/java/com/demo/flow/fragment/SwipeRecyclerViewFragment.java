@@ -49,8 +49,8 @@ public class SwipeRecyclerViewFragment extends BaseFragment implements BGARefres
         mAdapter = new SwipeRecyclerViewAdapter(mDataRv);
         mAdapter.setOnRVItemClickListener(this);
         mAdapter.setOnRVItemLongClickListener(this);
-        mAdapter.setOnItemChildClickListener(this);
-        mAdapter.setOnItemChildLongClickListener(this);
+        //mAdapter.setOnItemChildClickListener(this);
+        //mAdapter.setOnItemChildLongClickListener(this);
 
         mDataRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -67,7 +67,7 @@ public class SwipeRecyclerViewFragment extends BaseFragment implements BGARefres
         mRefreshLayout.setCustomHeaderView(DataEngine.getCustomHeaderView(mApp), false);
         BGAMoocStyleRefreshViewHolder refreshViewHolder = new BGAMoocStyleRefreshViewHolder(mApp, true);
         refreshViewHolder.setUltimateColor(getResources().getColor(R.color.colorPrimaryDark));
-        refreshViewHolder.setOriginalBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.custom_mooc_icon));
+        refreshViewHolder.setOriginalBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.mooc_ico_60));
         mRefreshLayout.setRefreshViewHolder(refreshViewHolder);
 
         mDataRv.addItemDecoration(new Divider(mApp));
@@ -165,6 +165,7 @@ public class SwipeRecyclerViewFragment extends BaseFragment implements BGARefres
             mAdapter.removeItem(position);
         }
         */
+        showToast("点击了条目 ");
     }
 
     @Override
@@ -175,17 +176,18 @@ public class SwipeRecyclerViewFragment extends BaseFragment implements BGARefres
             return true;
         }
         */
+        showToast("长点击了条目 ");
         return false;
     }
 
     @Override
     public void onRVItemClick(ViewGroup parent, View itemView, int position) {
-        showToast("点击了条目 " + mAdapter.getItem(position).getTitle());
+        //showToast("点击了条目 " + mAdapter.getItem(position).getTitle());
     }
 
     @Override
     public boolean onRVItemLongClick(ViewGroup parent, View itemView, int position) {
-        showToast("长按了条目 " + mAdapter.getItem(position).getTitle());
+        //showToast("长按了条目 " + mAdapter.getItem(position).getTitle());
         return true;
     }
 }

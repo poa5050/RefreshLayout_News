@@ -59,7 +59,8 @@ public class SwipeRecyclerViewAdapter extends BGARecyclerViewAdapter<News> {
     @Override
     public void fillData(BGAViewHolderHelper viewHolderHelper, int position, News model) {
         //Log.e("news",model.toString());
-        viewHolderHelper.setText(R.id.tv_item_swipe_title, model.getTitle()).setText(R.id.tv_item_swipe_time,model.getDatetime());
+        viewHolderHelper.setText(R.id.tv_item_swipe_title, model.getTitle().length() > 25 ? model.getTitle().substring(0,25) + "..." : model.getTitle())
+                .setText(R.id.tv_item_swipe_time,model.getDatetime());
         //ImageLoader.getInstance().displayImage(model.getImg_url(), (ImageView)viewHolderHelper.getView(R.id.tv_item_swipe_image), ImageLoaderUtil.displayOptions);
         TextView mDetail = (TextView) viewHolderHelper.getView(R.id.tv_item_swipe_detail);
         if(model.getAbstractNews() != null && !model.getAbstractNews().isEmpty()){
