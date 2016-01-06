@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_camara" android:icon="@android:drawable/ic_menu_camera"
+            android:title="Import" />
+        <item android:id="@+id/nav_gallery" android:icon="@android:drawable/ic_menu_gallery"
+            android:title="Gallery" />
+        <item android:id="@+id/nav_slideshow" android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="Slideshow" />
+        <item android:id="@+id/nav_manage" android:icon="@android:drawable/ic_menu_manage"
+            android:title="Tools" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item android:id="@+id/nav_share" android:icon="@android:drawable/ic_menu_share"
+                android:title="Share" />
+            <item android:id="@+id/nav_send" android:icon="@android:drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
+    -->
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/item_guonei" android:title="国内" android:orderInCategory="1" android:checked="true" />
+        <item android:id="@+id/item_guoji" android:title="国际"  android:orderInCategory="2" />
+        <item android:id="@+id/item_shehui" android:title="社会"  android:orderInCategory="3" />
+        <item android:id="@+id/item_yule" android:title="娱乐"  android:orderInCategory="4" />
+        <item android:id="@+id/item_jushi" android:title="军事"  android:orderInCategory="5" />
+        <item android:id="@+id/item_keji" android:title="科技"  android:orderInCategory="6" />
+        <item android:id="@+id/item_gaoxiao" android:title="搞笑"  android:orderInCategory="7" />
+        <item android:id="@+id/item_tiyu" android:title="体育"  android:orderInCategory="8" />
+        <item android:id="@+id/item_zhengfa" android:title="政法"  android:orderInCategory="9" />
+    </group>
+
+</menu>
