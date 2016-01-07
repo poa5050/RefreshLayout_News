@@ -1,8 +1,6 @@
 package com.demo.flow.adapter;
 
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,6 +32,7 @@ public class SwipeRecyclerViewAdapter extends BGARecyclerViewAdapter<News> {
 
     @Override
     public void setItemChildListener(BGAViewHolderHelper viewHolderHelper) {
+        /*
         BGASwipeItemLayout swipeItemLayout = viewHolderHelper.getView(R.id.sil_item_swipe_root);
         swipeItemLayout.setDelegate(new BGASwipeItemLayout.BGASwipeItemLayoutDelegate() {
             @Override
@@ -52,6 +51,7 @@ public class SwipeRecyclerViewAdapter extends BGARecyclerViewAdapter<News> {
                 closeOpenedSwipeItemLayoutWithAnim();
             }
         });
+        */
         //viewHolderHelper.setItemChildClickListener(R.id.tv_item_swipe_delete);
         //viewHolderHelper.setItemChildLongClickListener(R.id.tv_item_swipe_delete);
     }
@@ -70,7 +70,7 @@ public class SwipeRecyclerViewAdapter extends BGARecyclerViewAdapter<News> {
 
         ImageView imageView = (ImageView) viewHolderHelper.getView(R.id.tv_item_swipe_image);
         if(model.getImg_url() != null && !model.getImg_url().isEmpty()) {
-            ImageLoaderUtil.displayImg(imageView, model.getImg_url());
+            ImageLoaderUtil.imageLoader(imageView, model.getImg_url());
         }
     }
 
@@ -80,5 +80,4 @@ public class SwipeRecyclerViewAdapter extends BGARecyclerViewAdapter<News> {
         }
         mOpenedSil.clear();
     }
-
 }

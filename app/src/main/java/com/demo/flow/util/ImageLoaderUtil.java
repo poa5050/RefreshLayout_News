@@ -149,4 +149,8 @@ public class ImageLoaderUtil {
 			cache.put(url, bitmap);
 		}
 	}
+
+	public static void imageLoader(ImageView image,String url){
+		com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(url,image, displayOptions);
+	}
 }

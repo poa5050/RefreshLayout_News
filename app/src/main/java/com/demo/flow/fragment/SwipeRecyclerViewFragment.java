@@ -4,13 +4,17 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.demo.flow.adapter.NewsAdapter;
 import com.demo.flow.adapter.SwipeRecyclerViewAdapter;
 import com.demo.flow.engine.DataEngine;
 import com.demo.flow.model.News;
 import com.demo.flow.news.R;
+import com.demo.flow.news.WebViewActivity;
+import com.demo.flow.util.Constants;
 import com.demo.flow.util.ToastUtil;
 import com.demo.flow.widget.Divider;
 
@@ -27,8 +31,8 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 /**
  *
  */
-public class SwipeRecyclerViewFragment extends BaseFragment implements BGARefreshLayout.BGARefreshLayoutDelegate, BGAOnRVItemClickListener, BGAOnRVItemLongClickListener, BGAOnItemChildClickListener, BGAOnItemChildLongClickListener {
-    private SwipeRecyclerViewAdapter mAdapter;
+public class SwipeRecyclerViewFragment extends BaseFragment implements BGARefreshLayout.BGARefreshLayoutDelegate{
+    private NewsAdapter mAdapter;
     private BGARefreshLayout mRefreshLayout;
     private RecyclerView mDataRv;
     private int mNewPageNumber = 0;
@@ -42,13 +46,23 @@ public class SwipeRecyclerViewFragment extends BaseFragment implements BGARefres
         mDataRv = getViewById(R.id.rv_recyclerview_data);
     }
 
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            News news = (News)v.getTag();
+            WebViewActivity.start(getContext(),news.getUrl());
+        }
+    };
+
     @Override
     protected void setListener() {
         mRefreshLayout.setDelegate(this);
 
-        mAdapter = new SwipeRecyclerViewAdapter(mDataRv);
-        mAdapter.setOnRVItemClickListener(this);
-        mAdapter.setOnRVItemLongClickListener(this);
+        mAdapter = new NewsAdapter();
+        mAdapter.setActivity(getActivity());
+        mAdapter.setOnClickListener(onClickListener);
+        //mAdapter.setOnRVItemClickListener(this);
+        //mAdapter.setOnRVItemLongClickListener(this);
         //mAdapter.setOnItemChildClickListener(this);
         //mAdapter.setOnItemChildLongClickListener(this);
 
@@ -56,7 +70,7 @@ public class SwipeRecyclerViewFragment extends BaseFragment implements BGARefres
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 if (RecyclerView.SCROLL_STATE_DRAGGING == newState) {
-                    mAdapter.closeOpenedSwipeItemLayoutWithAnim();
+                    //mAdapter.closeOpenedSwipeItemLayoutWithAnim();
                 }
             }
         });
@@ -64,7 +78,7 @@ public class SwipeRecyclerViewFragment extends BaseFragment implements BGARefres
 
     @Override
     protected void processLogic(Bundle savedInstanceState) {
-        mRefreshLayout.setCustomHeaderView(DataEngine.getCustomHeaderView(mApp), false);
+        //mRefreshLayout.setCustomHeaderView(DataEngine.getCustomHeaderView(mApp), false);
         BGAMoocStyleRefreshViewHolder refreshViewHolder = new BGAMoocStyleRefreshViewHolder(mApp, true);
         refreshViewHolder.setUltimateColor(getResources().getColor(R.color.colorPrimaryDark));
         refreshViewHolder.setOriginalBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.mooc_ico_60));
@@ -157,37 +171,37 @@ public class SwipeRecyclerViewFragment extends BaseFragment implements BGARefres
         return true;
     }
 
-    @Override
-    public void onItemChildClick(ViewGroup parent, View childView, int position) {
+    //@Override
+    //public void onItemChildClick(ViewGroup parent, View childView, int position) {
         /*
         if (childView.getId() == R.id.tv_item_swipe_delete) {
             mAdapter.closeOpenedSwipeItemLayoutWithAnim();
             mAdapter.removeItem(position);
         }
         */
-        showToast("点击了条目 ");
-    }
+        //showToast("点击了条目 ");
+   // }
 
-    @Override
-    public boolean onItemChildLongClick(ViewGroup parent, View childView, int position) {
+    //@Override
+    //public boolean onItemChildLongClick(ViewGroup parent, View childView, int position) {
         /*
         if (childView.getId() == R.id.tv_item_swipe_delete) {
             showToast("长按了删除 " + mAdapter.getItem(position).getTitle());
             return true;
         }
         */
-        showToast("长点击了条目 ");
-        return false;
-    }
+        //showToast("长点击了条目 ");
+     //   return false;
+    //}
 
-    @Override
-    public void onRVItemClick(ViewGroup parent, View itemView, int position) {
-        //showToast("点击了条目 " + mAdapter.getItem(position).getTitle());
-    }
+    //@Override
+    //public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+    //    showToast("点击了条目 " + mAdapter.getItem(position).getTitle());
+    //}
 
-    @Override
-    public boolean onRVItemLongClick(ViewGroup parent, View itemView, int position) {
-        //showToast("长按了条目 " + mAdapter.getItem(position).getTitle());
-        return true;
-    }
+    //@Override
+    //public boolean onRVItemLongClick(ViewGroup parent, View itemView, int position) {
+    //   showToast("长按了条目 " + mAdapter.getItem(position).getTitle());
+    //    return true;
+    //}
 }

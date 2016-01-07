@@ -104,7 +104,6 @@ public class DataEngine {
         if (mVolleyRequestQueue == null) {
             mVolleyRequestQueue = Volley.newRequestQueue(contentActivity);
         }
-
         return mVolleyRequestQueue;
     }
 

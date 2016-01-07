@@ -12,7 +12,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +20,6 @@ import android.widget.TextView;
 import com.demo.flow.engine.DataEngine;
 import com.demo.flow.fragment.SwipeRecyclerViewFragment;
 import com.demo.flow.util.Constants;
-import com.demo.flow.util.ToastUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

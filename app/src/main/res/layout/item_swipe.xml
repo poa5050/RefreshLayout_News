@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cn.bingoogolapple.swipeitemlayout.BGASwipeItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/sil_item_swipe_root"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/selector_item"
     android:layout_marginBottom="10dp"
-    android:layout_marginTop="10dp"
-    app:bga_sil_bottomMode="pullOut">
+    android:layout_marginTop="10dp">
     <!--
     app:bga_sil_springDistance="20dp"
     app:bga_sil_swipeDirection="left">
-    -->
+
 
 
     <LinearLayout
@@ -21,13 +18,13 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-            <!--
+
             <EditText
                 android:id="@+id/et_item_swipe_title"
                 android:layout_width="100dp"
                 android:layout_height="match_parent" />
 
-              -->
+
 
             <TextView
                 android:id="@+id/tv_item_swipe_delete"
@@ -42,6 +39,8 @@
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
         </LinearLayout>
+
+    -->
 
 
     <LinearLayout
@@ -99,4 +98,4 @@
             android:visibility="gone"/>
     </LinearLayout>
 
-</cn.bingoogolapple.swipeitemlayout.BGASwipeItemLayout>
+</RelativeLayout>
