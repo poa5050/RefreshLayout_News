@@ -4,4 +4,12 @@
     <color name="colorPrimaryDark">#5290FF</color>
     <color name="colorPrimaryBack">#6F90FF</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="progress_start">#ff44b4db</color>
+    <color name="progress_center">#ff44b4db</color>
+    <color name="progress_end">#ff44b4db</color>
+    <color name="progress_background_start">#98C8D2</color>
+    <color name="progress_background_end">#98C8D2</color>
+
+    <color name="toast_bg">#c8414141</color><!-- Toast背景的灰色，半透明 -->
 </resources>

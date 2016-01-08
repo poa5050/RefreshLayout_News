@@ -13,6 +13,8 @@
         <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
             android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
             android:background="@drawable/side_nav_bar" app:popupTheme="@style/AppTheme.PopupOverlay">
+
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

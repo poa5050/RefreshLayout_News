@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.demo.flow.news.WebViewActivity">
 
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rl_webview_refresh"
         style="@style/MatchMatch">
 
-        <WebView
-            android:id="@+id/wv_webview_content"
-            style="@style/MatchAuto" />
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.tencent.smtt.sdk.WebView
+                android:id="@+id/previewWeb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <ProgressBar
+                android:id="@+id/previewProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:max="100"
+                android:progressDrawable="@drawable/progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"/>
+
+        </FrameLayout>
+        </ScrollView>
     </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
-</RelativeLayout>

@@ -57,7 +57,6 @@ public class SwipeRecyclerViewFragment extends BaseFragment implements BGARefres
     @Override
     protected void setListener() {
         mRefreshLayout.setDelegate(this);
-
         mAdapter = new NewsAdapter();
         mAdapter.setActivity(getActivity());
         mAdapter.setOnClickListener(onClickListener);

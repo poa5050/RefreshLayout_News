@@ -12,14 +12,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.demo.flow.engine.DataEngine;
 import com.demo.flow.fragment.SwipeRecyclerViewFragment;
 import com.demo.flow.util.Constants;
+import com.demo.flow.util.ToastUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -59,6 +63,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mViewPager.setCurrentItem(0, false);
         DataEngine.contentActivity = getApplicationContext();
         setUpViewPager();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            ToastUtil.show("再按一次退出");
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void setUpViewPager() {
@@ -131,12 +143,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setUpViewPager();
     }
 
+    // 上一次按下Back键的时间
+    long mLastBackTime = 0;
+    // 两次Back之间的有效时间间隔，2秒
+    long mBackInterval = 2 * 1000;
+
+    // 关闭软键盘
+    public void hideSoftInput() {
+        InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+    }
+
     @Override
     public void onBackPressed() {
         //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        /*
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            super.onBackPressed();
+        }
+        */
+
+        // 关闭软键盘
+        hideSoftInput();
+
+        if((System.currentTimeMillis() - mLastBackTime) > mBackInterval){
+            // 记录本次按键时间
+            mLastBackTime = System.currentTimeMillis();
+            // 提示
+            ToastUtil.show("再按一次退出");
+        } else {
+            // 取消提示
+            ToastUtil.cancel();
             super.onBackPressed();
         }
     }

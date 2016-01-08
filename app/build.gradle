@@ -41,4 +41,5 @@ dependencies {
     //OKHttp
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile files('libs/butterknife-7.0.1.jar')
+    compile files('libs/tbs_sdk_v1.4.0.1098_25431_obfs_20150827_115045.jar')
 }
