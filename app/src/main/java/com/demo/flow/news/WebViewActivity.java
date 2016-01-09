@@ -1,5 +1,6 @@
 package com.demo.flow.news;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.demo.flow.util.ToastUtil;
 import com.tencent.smtt.export.external.interfaces.SslError;
 import com.tencent.smtt.export.external.interfaces.SslErrorHandler;
 import com.tencent.smtt.sdk.WebChromeClient;
@@ -53,6 +55,8 @@ public class WebViewActivity extends AppCompatActivity implements BGARefreshLayo
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mApp = App.getInstance();
         mRefreshLayout = (BGARefreshLayout)findViewById(R.id.rl_webview_refresh);
         mRefreshLayout.setDelegate(this);
@@ -63,8 +67,21 @@ public class WebViewActivity extends AppCompatActivity implements BGARefreshLayo
             @Override
             public void onClick(View v) {
                 onBackPressed();
+                finish();
+                //onClickShare(v);
             }
         });
+    }
+
+    public void onClickShare(View view) {
+
+        Intent intent=new Intent(Intent.ACTION_SEND);
+        intent.setAction(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
+        intent.putExtra(Intent.EXTRA_TEXT, "终于可以了!!!");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(Intent.createChooser(intent, getTitle()));
+
     }
 
     private void initActivityWH() {

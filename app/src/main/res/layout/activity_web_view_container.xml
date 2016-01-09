@@ -2,8 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
     <android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -24,9 +27,10 @@
                 android:paddingBottom="12dp"
                 android:paddingRight="12dp"
                 android:layout_height="match_parent"
-                android:src="@mipmap/ic_ab_up_white"
+                android:src="@drawable/ic_ab_up_white"
                 android:scaleType="centerCrop"
                 android:id="@+id/back_up"
+                android:visibility="gone"
                 />
 
             <TextView

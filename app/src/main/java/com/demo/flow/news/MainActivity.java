@@ -1,6 +1,7 @@
 package com.demo.flow.news;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
@@ -12,12 +13,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.demo.flow.engine.DataEngine;
@@ -25,11 +25,18 @@ import com.demo.flow.fragment.SwipeRecyclerViewFragment;
 import com.demo.flow.util.Constants;
 import com.demo.flow.util.ToastUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.bingoogolapple.bgabanner.BGAViewPager;
+import yalantis.com.sidemenu.interfaces.Resourceble;
+import yalantis.com.sidemenu.interfaces.ScreenShotable;
+import yalantis.com.sidemenu.model.SlideMenuItem;
+import yalantis.com.sidemenu.util.ViewAnimator;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,ViewAnimator.ViewAnimatorListener {
 
     private BGAViewPager mViewPager;
 
@@ -38,6 +45,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Bind(R.id.drawer_layout)
     DrawerLayout drawer;
+
+    private ActionBarDrawerToggle drawerToggle;
+
+    //@Bind(R.id.left_drawer)
+    LinearLayout linearLayout;
+
+    private ViewAnimator viewAnimator;
+
+    private List<SlideMenuItem> list = new ArrayList<>();
+
+    public MainActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +67,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
+        /*
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        drawer.setScrimColor(Color.TRANSPARENT);
+        drawerToggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.drawer_open,R.string.drawer_close) {
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                linearLayout.removeAllViews();
+                linearLayout.invalidate();
+            }
 
-        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                super.onDrawerSlide(drawerView, slideOffset);
+                if (slideOffset > 0.6 && linearLayout.getChildCount() == 0)
+                    viewAnimator.showMenuContent();
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+        };
+        drawer.setDrawerListener(drawerToggle);
+        createMenuList();
+        viewAnimator = new ViewAnimator<>(this, list, null, drawer, this);
+        */
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -65,12 +110,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setUpViewPager();
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK){
-            ToastUtil.show("再按一次退出");
-        }
-        return super.onKeyDown(keyCode, event);
+    private void createMenuList() {
+        SlideMenuItem menuItem0 = new SlideMenuItem(ContentFragment.CLOSE, R.drawable.icn_close);
+        list.add(menuItem0);
+        SlideMenuItem menuItem = new SlideMenuItem(ContentFragment.BUILDING, R.drawable.icn_1);
+        list.add(menuItem);
+        SlideMenuItem menuItem2 = new SlideMenuItem(ContentFragment.BOOK, R.drawable.icn_2);
+        list.add(menuItem2);
+        SlideMenuItem menuItem3 = new SlideMenuItem(ContentFragment.PAINT, R.drawable.icn_3);
+        list.add(menuItem3);
+        SlideMenuItem menuItem4 = new SlideMenuItem(ContentFragment.CASE, R.drawable.icn_4);
+        list.add(menuItem4);
+        SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.SHOP, R.drawable.icn_5);
+        list.add(menuItem5);
+        SlideMenuItem menuItem6 = new SlideMenuItem(ContentFragment.PARTY, R.drawable.icn_6);
+        list.add(menuItem6);
+        SlideMenuItem menuItem7 = new SlideMenuItem(ContentFragment.MOVIE, R.drawable.icn_7);
+        list.add(menuItem7);
     }
 
     private void setUpViewPager() {
@@ -86,6 +142,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position) {
+        return null;
+    }
+
+    @Override
+    public void disableHomeButton() {
+        getSupportActionBar().setHomeButtonEnabled(false);
+    }
+
+    @Override
+    public void enableHomeButton() {
+        getSupportActionBar().setHomeButtonEnabled(true);
+        drawer.closeDrawers();
+    }
+
+    @Override
+    public void addViewToContainer(View view) {
+        linearLayout.addView(view);
     }
 
     private static class ContentViewPagerAdapter extends FragmentPagerAdapter {

@@ -12,6 +12,10 @@ buildscript {
     }
 }
 
+def isReleaseBuild() {
+    return version.contains("SNAPSHOT") == false
+}
+
 allprojects {
     repositories {
         jcenter()
@@ -21,3 +25,5 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+apply plugin: 'android-reporting'
