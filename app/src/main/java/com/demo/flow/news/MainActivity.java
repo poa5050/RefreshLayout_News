@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -138,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
+        //tongbu(item,true);
         refershView(item.getTitle().toString());
         //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -206,6 +208,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        //tongbu(item,false);
         item.setChecked(true);
         refershView(item.getTitle().toString());
         return super.onOptionsItemSelected(item);
@@ -218,6 +221,73 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         mViewPager.setCurrentItem(0, false);
         setUpViewPager();
+    }
+
+    private void tongbu(MenuItem item,boolean isNav){
+        Log.e("news",item == null?"1":"2");
+        int checkId = R.id.action_guonei;
+        if(isNav){
+            switch (item.getItemId()) {
+                case R.id.item_guonei:
+                    checkId = R.id.action_guonei;
+                    break;
+                case R.id.item_guoji:
+                    checkId = R.id.action_guonei;
+                    break;
+                case R.id.item_gaoxiao:
+                    checkId = R.id.action_gaoxiao;
+                    break;
+                case R.id.item_jushi:
+                    checkId = R.id.action_jushi;
+                    break;
+                case R.id.item_keji:
+                    checkId = R.id.action_keji;
+                    break;
+                case R.id.item_shehui:
+                    checkId = R.id.action_shehui;
+                    break;
+                case R.id.item_tiyu:
+                    checkId = R.id.action_tiyu;
+                    break;
+                case R.id.item_zhengfa:
+                    checkId = R.id.action_zhengfa;
+                    break;
+                case R.id.item_yule:
+                    checkId = R.id.action_yule;
+                    break;
+            }
+        }else{
+            switch (item.getItemId()) {
+                case R.id.action_guonei:
+                    checkId = R.id.item_guonei;
+                    break;
+                case R.id.action_guoji:
+                    checkId = R.id.item_guonei;
+                    break;
+                case R.id.action_gaoxiao:
+                    checkId = R.id.item_gaoxiao;
+                    break;
+                case R.id.action_jushi:
+                    checkId = R.id.item_jushi;
+                    break;
+                case R.id.action_keji:
+                    checkId = R.id.item_keji;
+                    break;
+                case R.id.action_shehui:
+                    checkId = R.id.item_shehui;
+                    break;
+                case R.id.action_tiyu:
+                    checkId = R.id.item_tiyu;
+                    break;
+                case R.id.action_zhengfa:
+                    checkId = R.id.item_zhengfa;
+                    break;
+                case R.id.action_yule:
+                    checkId = R.id.item_yule;
+                    break;
+            }
+        }
+        ((MenuItem)findViewById(checkId)).setChecked(true);
     }
 
     // 上一次按下Back键的时间
