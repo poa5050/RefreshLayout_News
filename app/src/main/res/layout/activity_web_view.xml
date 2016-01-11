@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+    <!--
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rl_webview_refresh"
         style="@style/MatchMatch">
+
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none">
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:scrollbars="none">-->
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
             <com.tencent.smtt.sdk.WebView
                 android:id="@+id/previewWeb"
                 android:layout_width="match_parent"
@@ -25,6 +29,50 @@
                 android:progressDrawable="@drawable/progress_bar"
                 style="?android:attr/progressBarStyleHorizontal"/>
 
+
+                <com.getbase.floatingactionbutton.FloatingActionsMenu
+                    android:id="@+id/multiple_actions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    app:fab_addButtonColorNormal="@android:color/black"
+                    app:fab_addButtonColorPressed="@color/toast_bg"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_gravity="bottom">
+
+                    <com.getbase.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/share"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:fab_colorNormal="@android:color/black"
+                        app:fab_icon="@drawable/ic_share_white"
+                        app:fab_colorPressed="@color/toast_bg"/>
+
+                    <com.getbase.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/refresh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:fab_colorNormal="@android:color/black"
+                        app:fab_icon="@drawable/ic_refresh"
+                        app:fab_colorPressed="@color/toast_bg"/>
+
+                    <com.getbase.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/goBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:fab_colorNormal="@android:color/black"
+                        app:fab_icon="@mipmap/ic_ab_up_white"
+                        app:fab_colorPressed="@color/toast_bg"/>
+
+                </com.getbase.floatingactionbutton.FloatingActionsMenu>
         </FrameLayout>
+
+<!--
         </ScrollView>
     </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+    -->

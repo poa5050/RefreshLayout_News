@@ -3,6 +3,9 @@ repositories {
     maven {
         url "https://jitpack.io"
     }
+    flatDir {
+        dirs 'libs'
+    }
 }
 android {
     compileSdkVersion 23
@@ -26,6 +29,7 @@ dependencies {
     compile project(':library')
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    compile(name: 'button', ext: 'aar')
     compile 'com.android.support:appcompat-v7:23.+'
     compile 'com.android.support:design:23.+'
     compile 'com.nineoldandroids:library:2.4.0'

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +21,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.demo.flow.util.ToastUtil;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.tencent.smtt.export.external.interfaces.SslError;
 import com.tencent.smtt.export.external.interfaces.SslErrorHandler;
 import com.tencent.smtt.sdk.WebChromeClient;
@@ -32,7 +35,7 @@ import cn.bingoogolapple.refreshlayout.BGAMoocStyleRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 public class WebViewActivity extends AppCompatActivity implements BGARefreshLayout.BGARefreshLayoutDelegate{
-    private BGARefreshLayout mRefreshLayout;
+    //private BGARefreshLayout mRefreshLayout;
     private App mApp;
 
     @Bind(R.id.webTitle)
@@ -47,6 +50,18 @@ public class WebViewActivity extends AppCompatActivity implements BGARefreshLayo
     @Bind(R.id.back_up)
     ImageView back;
 
+    @Bind(R.id.multiple_actions)
+    FloatingActionsMenu floatingActionsMenu;
+
+    @Bind(R.id.refresh)
+    FloatingActionButton actionButton_refresh;
+
+    @Bind(R.id.share)
+    FloatingActionButton actionButton_share;
+
+    @Bind(R.id.goBack)
+    FloatingActionButton actionButton_goBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,8 +74,8 @@ public class WebViewActivity extends AppCompatActivity implements BGARefreshLayo
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mApp = App.getInstance();
-        mRefreshLayout = (BGARefreshLayout)findViewById(R.id.rl_webview_refresh);
-        mRefreshLayout.setDelegate(this);
+        //mRefreshLayout = (BGARefreshLayout)findViewById(R.id.rl_webview_refresh);
+        //mRefreshLayout.setDelegate(this);
         processLogic();
         initContentView();
 
@@ -72,17 +87,61 @@ public class WebViewActivity extends AppCompatActivity implements BGARefreshLayo
                 //onClickShare(v);
             }
         });
+
+
+        /*
+        final View actionB = findViewById(R.id.action_b);
+
+        FloatingActionButton actionC = new FloatingActionButton(getBaseContext());
+        actionC.setTitle("Hide/Show Action above");
+        actionC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actionB.setVisibility(actionB.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+            }
+        });
+
+        final FloatingActionsMenu menuMultipleActions = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
+        menuMultipleActions.addButton(actionC);
+        */
+        floatingActionsMenu.setAlpha(0.6f);
+        initClickListener();
     }
 
-    public void onClickShare(View view) {
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.share:
+                    //分享
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain"); // 纯文本
+                    /*图片分享
+                    it.setType("image/png");
+                    //添加图片
+                    File f = new File(Environment.getExternalStorageDirectory() +"/Pictures/2.png");
+                    Uri u = Uri.fromFile(f);
+                    it.putExtra(Intent.EXTRA_STREAM, u);
+                    */
+                    String sb=getIntent().getStringExtra("url");
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "");
+                    intent.putExtra(Intent.EXTRA_TEXT, sb);
+                    startActivity(Intent.createChooser(intent, getTitle()));
+                    break;
+                case R.id.refresh:
+                    webPreview.reload();
+                    break;
+                case R.id.goBack:
+                    webPreview.goBack();
+                    break;
+            }
+        }
+    };
 
-        Intent intent=new Intent(Intent.ACTION_SEND);
-        intent.setAction(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-        intent.putExtra(Intent.EXTRA_TEXT, "终于可以了!!!");
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(Intent.createChooser(intent, getTitle()));
-
+    private void initClickListener(){
+        actionButton_refresh.setOnClickListener(onClickListener);
+        actionButton_share.setOnClickListener(onClickListener);
+        actionButton_goBack.setOnClickListener(onClickListener);
     }
 
     private void initActivityWH() {
@@ -108,7 +167,7 @@ public class WebViewActivity extends AppCompatActivity implements BGARefreshLayo
         BGAMoocStyleRefreshViewHolder refreshViewHolder = new BGAMoocStyleRefreshViewHolder(mApp, true);
         refreshViewHolder.setUltimateColor(getResources().getColor(R.color.colorPrimaryDark));
         refreshViewHolder.setOriginalBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.mooc_ico_60));
-        mRefreshLayout.setRefreshViewHolder(refreshViewHolder);
+        //mRefreshLayout.setRefreshViewHolder(refreshViewHolder);
     }
 
     @Override
@@ -118,7 +177,7 @@ public class WebViewActivity extends AppCompatActivity implements BGARefreshLayo
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        mRefreshLayout.endLoadingMore();
+        //mRefreshLayout.endLoadingMore();
         return false;
     }
 
@@ -139,7 +198,7 @@ public class WebViewActivity extends AppCompatActivity implements BGARefreshLayo
         // 自定义WebViewClient
         webPreview.setWebViewClient(new MyWebViewClient());
 
-        mRefreshLayout.beginRefreshing();
+        //mRefreshLayout.beginRefreshing();
         loadUrl(getIntent().getStringExtra("url"));
 
     }
@@ -161,6 +220,11 @@ public class WebViewActivity extends AppCompatActivity implements BGARefreshLayo
         @Override
         public void onPageStarted(com.tencent.smtt.sdk.WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
+            if(!url.equals(getIntent().getStringExtra("url"))){
+                actionButton_goBack.setVisibility(View.VISIBLE);
+            }else{
+                actionButton_goBack.setVisibility(View.GONE);
+            }
             mProgressBar.setVisibility(View.VISIBLE);
             //evaluateWeilianJavascript(view);
         }
@@ -168,7 +232,7 @@ public class WebViewActivity extends AppCompatActivity implements BGARefreshLayo
         @Override
         public void onPageFinished(com.tencent.smtt.sdk.WebView view, String url) {
             super.onPageFinished(view, url);
-            mRefreshLayout.endRefreshing();
+            //mRefreshLayout.endRefreshing();
             mProgressBar.setVisibility(View.GONE);
         }
 

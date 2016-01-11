@@ -71,6 +71,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dependency-cache" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/button/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/cn.bingoogolapple/bga-adapter/1.0.5/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/cn.bingoogolapple/bga-banner/2.0.3/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/cn.bingoogolapple/bga-refreshlayout/1.0.7/jars" />
@@ -113,6 +114,7 @@
     <orderEntry type="library" exported="" name="httpmime-4.3.1" level="project" />
     <orderEntry type="library" exported="" name="universal-image-loader-1.9.4" level="project" />
     <orderEntry type="library" exported="" name="1_universal-image-loader-1.9.4" level="project" />
+    <orderEntry type="library" exported="" name="button-" level="project" />
     <orderEntry type="library" exported="" name="bga-swipeitemlayout-1.0.2" level="project" />
     <orderEntry type="library" exported="" name="fastjson-1.2.7" level="project" />
     <orderEntry type="library" exported="" name="bga-refreshlayout-1.0.7" level="project" />
