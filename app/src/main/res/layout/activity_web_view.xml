@@ -39,6 +39,7 @@
                     android:layout_alignParentEnd="true"
                     app:fab_addButtonColorNormal="@android:color/black"
                     app:fab_addButtonColorPressed="@color/toast_bg"
+                    app:fab_addButtonSize="mini"
                     android:textColor="@color/white"
                     android:layout_marginBottom="16dp"
                     android:layout_marginRight="16dp"
@@ -51,6 +52,7 @@
                         android:layout_height="wrap_content"
                         app:fab_colorNormal="@android:color/black"
                         app:fab_icon="@drawable/ic_share_white"
+                        app:fab_addButtonSize="mini"
                         app:fab_colorPressed="@color/toast_bg"/>
 
                     <com.getbase.floatingactionbutton.FloatingActionButton
@@ -59,6 +61,7 @@
                         android:layout_height="wrap_content"
                         app:fab_colorNormal="@android:color/black"
                         app:fab_icon="@drawable/ic_refresh"
+                        app:fab_addButtonSize="mini"
                         app:fab_colorPressed="@color/toast_bg"/>
 
                     <com.getbase.floatingactionbutton.FloatingActionButton
@@ -67,7 +70,8 @@
                         android:layout_height="wrap_content"
                         app:fab_colorNormal="@android:color/black"
                         app:fab_icon="@mipmap/ic_ab_up_white"
-                        app:fab_colorPressed="@color/toast_bg"/>
+                        app:fab_addButtonSize="mini"
+                        app:fab_colorPressed="@color/toast_bg" />
 
                 </com.getbase.floatingactionbutton.FloatingActionsMenu>
         </FrameLayout>
