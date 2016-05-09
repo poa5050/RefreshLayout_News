@@ -1,1 +1,1 @@
-#BGARefreshLayout_Demo
+#RefreshLayout_News
